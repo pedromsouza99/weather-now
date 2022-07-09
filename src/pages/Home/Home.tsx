@@ -1,3 +1,11 @@
+import { Header } from "../../components/layout/Header";
+import { WeatherPage } from "../Weather/WeatherPage";
+
 export function Home() {
-  return <div>Home</div>;
+  return (
+    <div id="HomePage">
+      <Header />
+      <WeatherPage />
+    </div>
+  );
 }

@@ -6,17 +6,17 @@
 	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
 	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
 ]>
-<svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+<svg version="1.2" baseProfile="tiny" id="Layer_1" xmlnsX="&ns_extend;" xmlnsI="&ns_ai;" xmlnsGraph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnsA="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
 	 x="0px" y="0px" width="108px" height="16px" viewBox="0 0 108 16" xml:space="preserve">
 <g>
 	<g>
 		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="8" y1="8" x2="8" y2="0">
 			<stop  offset="0" style="stop-color:#FA5E5A"/>
 			<stop  offset="1" style="stop-color:#FF8800"/>
-			<a:midPointStop  offset="0" style="stop-color:#FA5E5A"/>
-			<a:midPointStop  offset="0.5" style="stop-color:#FA5E5A"/>
-			<a:midPointStop  offset="1" style="stop-color:#FF8800"/>
+			<aMidPointStop  offset="0" style="stop-color:#FA5E5A"/>
+			<aMidPointStop  offset="0.5" style="stop-color:#FA5E5A"/>
+			<aMidPointStop  offset="1" style="stop-color:#FF8800"/>
 		</linearGradient>
 		<path fill="url(#SVGID_1_)" d="M8,0C3.582,0,0,3.582,0,8h16C16,3.582,12.418,0,8,0z"/>
 		<path fill="#CF5278" d="M0.085,9c0.072,0.574,0.185,1.137,0.372,1.667h15.086c0.188-0.53,0.3-1.093,0.372-1.667H0.085z M8,16

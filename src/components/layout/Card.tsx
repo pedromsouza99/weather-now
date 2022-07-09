@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 interface CardProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
 export function Card(props: CardProps) {
-  return <CardStyle>{props.children}</CardStyle>;
+  return <CardStyle {...props}>{props.children}</CardStyle>;
 }
 
 const CardStyle = styled.div`

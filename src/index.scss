@@ -12,9 +12,10 @@
   --greyDark: #737c84;
   --blue: #69a3ff;
   --yellow: #ff9632;
-  --blue: #ed1946;
+  --red: #ed1946;
 
   --spacing-50: 0.5em;
+  --spacing-75: 0.75em;
   --spacing-100: 1em;
   --spacing-200: 2em;
 
@@ -33,6 +34,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--app-bg);
+  color: var(--greyDark);
 }
 
 code {

@@ -9,6 +9,6 @@ export function CardHeader(props: CardHeaderProps) {
 }
 
 const CardHeaderStyle = styled.div`
-  padding: var(--spacing-100);
+  padding: var(--spacing-75);
   border-bottom: 1px solid var(--divider);
 `;

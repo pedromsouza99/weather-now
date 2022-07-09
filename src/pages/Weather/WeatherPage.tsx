@@ -7,9 +7,9 @@ export function WeatherPage() {
     <Container>
       <Page>
         <CardsContainer>
-          <WeatherCard></WeatherCard>
-          <WeatherCard></WeatherCard>
-          <WeatherCard></WeatherCard>
+          <WeatherCard />
+          <WeatherCard />
+          <WeatherCard />
         </CardsContainer>
       </Page>
     </Container>
@@ -17,14 +17,29 @@ export function WeatherPage() {
 }
 
 const Page = styled.div`
-  height: 100vh;
+  min-height: calc(100vh - 46px);
   width: 100%;
+  padding: var(--spacing-100);
+  display: grid;
 `;
 
+const cardWidth = 220;
 const CardsContainer = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
   justify-content: space-around;
   align-items: center;
+  .weather-card {
+    min-width: ${cardWidth}px;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: var(--spacing-100);
+
+    .weather-card {
+      width: 100%;
+    }
+  }
 `;

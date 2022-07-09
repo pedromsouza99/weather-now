@@ -3,9 +3,9 @@ import { WeatherPage } from "../Weather/WeatherPage";
 
 export function Home() {
   return (
-    <div id="HomePage">
+    <main id="HomePage">
       <Header />
       <WeatherPage />
-    </div>
+    </main>
   );
 }

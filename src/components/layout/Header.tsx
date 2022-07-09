@@ -31,5 +31,5 @@ const NavStyles = styled.nav`
 `;
 
 const ImgLogo = styled.img`
-  height: 50%;
+  height: 45%;
 `;

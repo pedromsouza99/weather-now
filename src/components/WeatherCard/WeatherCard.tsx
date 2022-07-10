@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
-import { useWeather } from "../pages/Weather/useWeather";
-import { Button } from "./layout/Button";
-import { Card } from "./layout/Card";
-import { CardContent } from "./layout/CardContent";
-import { CardFooter } from "./layout/CardFooter";
-import { CardHeader } from "./layout/CardHeader";
-import { Loader } from "./layout/Loader";
-import { Text } from "./layout/Text";
+import { useWeather } from "pages/Weather/useWeather";
+import { Button } from "components/layout/Button";
+import { Card } from "components/layout/Card";
+import { CardContent } from "components/layout/CardContent";
+import { CardFooter } from "components/layout/CardFooter";
+import { CardHeader } from "components/layout/CardHeader";
+import { Loader } from "components/layout/Loader";
+import { Text } from "components/layout/Text";
 
 export interface WeatherCardProps {
   cityCode: string;

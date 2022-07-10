@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import loadersvg from "../../assets/loader.svg";
+import loadersvg from "assets/loader.svg";
 
 export interface LoaderProps {
   className?: string;

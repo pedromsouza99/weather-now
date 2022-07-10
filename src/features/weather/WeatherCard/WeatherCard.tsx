@@ -22,6 +22,7 @@ export function WeatherCard(props: WeatherCardProps) {
 
   useEffect(() => {
     getCityWeather();
+    // adds an interval to refresh the search every 10 minutes
     const minute = 60 * 1000;
     intervalRef.current = setInterval(getCityWeather, minute * 10);
     return () => {

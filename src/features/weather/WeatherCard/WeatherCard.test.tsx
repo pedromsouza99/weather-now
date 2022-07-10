@@ -1,31 +1,78 @@
 import { render, waitFor, screen } from "@testing-library/react";
-import {
-  CityWeatherResponse,
-  weatherResponseExample,
-} from "features/weather/useWeather";
+import { weatherResponseExample } from "features/weather/useWeather";
 import { WeatherCard } from "./WeatherCard";
-jest.mock("axios");
-// eslint-disable-next-line import/first
 import axios from "axios";
-
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-
-const mockResponse = weatherResponseExample;
 
 describe("renders WeatherCard with data", () => {
   it("shows city temperature", async () => {
-    render(<WeatherCard cityCode="london,uk" />);
-    const loader = await screen.findByTestId("loader");
-    expect(loader).toBeVisible();
+    const mockAxiosGet = jest.spyOn(axios, "get");
 
-    mockedAxios.get.mockResolvedValue({
-      data: mockResponse,
+    mockAxiosGet.mockResolvedValue({
+      data: weatherResponseExample,
     });
 
-    const temperatureElement = await screen.findByTestId("card-temperature");
+    render(<WeatherCard cityCode="london,uk" />);
+
+    expect(mockAxiosGet).toHaveBeenCalled();
+    expect(mockAxiosGet).toHaveBeenCalledTimes(1);
+
+    const temperatureElement = await waitFor(() =>
+      screen.findByTestId("card-temperature")
+    );
 
     expect(temperatureElement).toHaveTextContent(
-      `${weatherResponseExample.main.temp - 273.15}º`
+      `${Math.floor(weatherResponseExample.main.temp - 273.15)}º`
     );
+  });
+
+  it("shows city humidity and pressure details", async () => {
+    const mockAxiosGet = jest.spyOn(axios, "get");
+
+    mockAxiosGet.mockResolvedValue({
+      data: weatherResponseExample,
+    });
+
+    render(<WeatherCard cityCode="london,uk" showDetails />);
+
+    expect(mockAxiosGet).toHaveBeenCalled();
+    expect(mockAxiosGet).toHaveBeenCalledTimes(1);
+
+    const temperatureElement = await waitFor(() =>
+      screen.findByTestId("card-temperature")
+    );
+    expect(temperatureElement).toHaveTextContent(
+      `${Math.floor(weatherResponseExample.main.temp - 273.15)}º`
+    );
+    const details = await screen.findByTestId("details-row");
+    expect(details).toBeTruthy();
+  });
+
+  it("shows loader while request runs", async () => {
+    const mockAxiosGet = jest.spyOn(axios, "get");
+
+    mockAxiosGet.mockResolvedValue({
+      data: weatherResponseExample,
+    });
+
+    render(<WeatherCard cityCode="london,uk" />);
+    const loader = await screen.findByTestId("loader");
+
+    expect(loader).toBeTruthy();
+  });
+
+  it("shows error message when rejected", async () => {
+    const mockAxiosGet = jest.spyOn(axios, "get");
+
+    mockAxiosGet.mockRejectedValueOnce({
+      data: undefined,
+    });
+
+    render(<WeatherCard cityCode="london,uk" />);
+
+    expect(mockAxiosGet).toHaveBeenCalled();
+    expect(mockAxiosGet).toHaveBeenCalledTimes(1);
+
+    const errorMessage = await screen.findByTestId("error-message");
+    expect(errorMessage).toBeTruthy();
   });
 });

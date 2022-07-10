@@ -69,11 +69,7 @@ export function useWeather(cityCode: string) {
 
   const cacheCityData = useCallback(
     (data: CityWeather) => {
-      try {
-        localStorage.setItem(cityCode, JSON.stringify(data));
-      } catch (error) {
-        console.error(error);
-      }
+      localStorage.setItem(cityCode, JSON.stringify(data));
     },
     [cityCode]
   );
@@ -105,7 +101,6 @@ export function useWeather(cityCode: string) {
       setLoading(false);
       setError(false);
     } catch (error) {
-      console.error(error);
       setLoading(false);
       setError(true);
     }

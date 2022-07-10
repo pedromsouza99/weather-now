@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# Como utilizar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Para rodar o projeto será necessário ter instalado
 
-## Available Scripts
+[Node.js](https://nodejs.org/en/download/) versão 16.15.0 ou maior
 
-In the project directory, you can run:
+[Yarn](https://classic.yarnpkg.com/lang/en/docs/install) versão estável clássica (1.22.X)
 
-### `npm start`
+## Versão de desenvolvimento
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Em um terminal, na raiz do projeto rode:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`yarn` Para instalar as dependências
 
-### `npm test`
+`yarn start` Para rodar o projeto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Roda o projeto em versão de desenvolvimento
 
-### `npm run build`
+Abra [http://localhost:3000](http://localhost:3000) em um navegador para utilizar.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Versão de Produção
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Prepara a aplicação para uso em produção, com otimizações e melhoria de performance
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Em um terminal, na raiz do projeto rode
 
-### `npm run eject`
+`yarn`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`yarn build`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Em seguida, para visualizar a versão de produção, primeiro instale o pacote "serve"
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`yarn global add serve`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`serve -s build`
 
-## Learn More
+## Testes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Em um terminal, após ter instalado as dependências com `yarn`, rode na raiz do projeto:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`yarn test`

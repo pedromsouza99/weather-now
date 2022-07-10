@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface CardFooterProps {
+export interface CardFooterProps {
   children?: React.ReactNode;
 }
 

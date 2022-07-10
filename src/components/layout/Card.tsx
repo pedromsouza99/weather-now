@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface CardProps {
+export interface CardProps {
   children?: React.ReactNode;
   className?: string;
 }

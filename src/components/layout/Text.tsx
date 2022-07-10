@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface TextProps {
+export interface TextProps {
   children: React.ReactNode;
   dBlock?: boolean;
   align?: "left" | "center" | "right";

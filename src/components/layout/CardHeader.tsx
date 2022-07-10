@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface CardHeaderProps {
+export interface CardHeaderProps {
   children?: React.ReactNode;
 }
 

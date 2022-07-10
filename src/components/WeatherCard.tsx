@@ -9,7 +9,7 @@ import { CardHeader } from "./layout/CardHeader";
 import { Loader } from "./layout/Loader";
 import { Text } from "./layout/Text";
 
-interface WeatherCardProps {
+export interface WeatherCardProps {
   cityCode: string;
   showDetails?: boolean;
 }

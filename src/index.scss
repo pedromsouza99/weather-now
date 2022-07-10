@@ -9,10 +9,11 @@
   --divider: #ebebeb;
   --box-shadow: rgba(51, 51, 51, 0.1);
   --grey: #b4b4b4;
-  --greyDark: #737c84;
+  --grey-dark: #737c84;
   --blue: #69a3ff;
   --yellow: #ff9632;
   --red: #ed1946;
+  --white: #fff;
 
   --spacing-50: 0.5em;
   --spacing-75: 0.75em;
@@ -34,10 +35,79 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--app-bg);
-  color: var(--greyDark);
+  color: var(--grey-dark);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.m-1 {
+  margin: var(--spacing-50);
+}
+.mt-1 {
+  margin-top: var(--spacing-50);
+}
+.mb-1 {
+  margin-bottom: var(--spacing-50);
+}
+.mr-1 {
+  margin-right: var(--spacing-50);
+}
+.ml-1 {
+  margin-left: var(--spacing-50);
+}
+.m-2 {
+  margin: var(--spacing-75);
+}
+.mt-2 {
+  margin-top: var(--spacing-75);
+}
+.mb-2 {
+  margin-bottom: var(--spacing-75);
+}
+.mr-2 {
+  margin-right: var(--spacing-75);
+}
+.ml-2 {
+  margin-left: var(--spacing-75);
+}
+.m-3 {
+  margin: var(--spacing-100);
+}
+.mt-3 {
+  margin-top: var(--spacing-100);
+}
+.mb-3 {
+  margin-bottom: var(--spacing-100);
+}
+.mr-3 {
+  margin-right: var(--spacing-100);
+}
+.ml-3 {
+  margin-left: var(--spacing-100);
+}
+.m-4 {
+  margin: var(--spacing-200);
+}
+.mt-4 {
+  margin-top: var(--spacing-200);
+}
+.mb-4 {
+  margin-bottom: var(--spacing-200);
+}
+.mr-4 {
+  margin-right: var(--spacing-200);
+}
+.ml-4 {
+  margin-left: var(--spacing-200);
+}
+
+.m-auto {
+  margin: auto;
 }

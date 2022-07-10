@@ -7,9 +7,9 @@ export function WeatherPage() {
     <Container>
       <Page>
         <CardsContainer>
-          <WeatherCard />
-          <WeatherCard />
-          <WeatherCard />
+          <WeatherCard cityCode="Nuuk,gl" />
+          <WeatherCard cityCode="Urubici,br" showDetails />
+          <WeatherCard cityCode="Nairobi,ke" />
         </CardsContainer>
       </Page>
     </Container>

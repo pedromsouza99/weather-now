@@ -1,68 +1,121 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
+import { useWeather } from "../pages/Weather/useWeather";
+import { Button } from "./layout/Button";
 import { Card } from "./layout/Card";
 import { CardContent } from "./layout/CardContent";
 import { CardFooter } from "./layout/CardFooter";
 import { CardHeader } from "./layout/CardHeader";
+import { Loader } from "./layout/Loader";
 import { Text } from "./layout/Text";
 
 interface WeatherCardProps {
-  color?: "blue" | "red" | "yellow";
+  cityCode: string;
+  showDetails?: boolean;
 }
 
 export function WeatherCard(props: WeatherCardProps) {
-  let details = false;
-  let value = Math.floor(Math.random() * 30);
+  const { city, getCityWeather, loading, setLoading, error } = useWeather(
+    props.cityCode
+  );
+  const intervalRef = useRef<NodeJS.Timer>();
+
+  useEffect(() => {
+    intervalRef.current = setInterval(getCityWeather, 10000);
+    getCityWeather();
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [getCityWeather]);
+
+  const refresh = () => {
+    setLoading(true);
+    getCityWeather();
+  };
 
   const color = useMemo(() => {
+    if (!city) return "";
     let c = "blue";
-    if (value > 5) c = "yellow";
-    if (value > 25) c = "red";
+    if (city?.temperature > 5) c = "yellow";
+    if (city?.temperature > 25) c = "red";
     return c;
-  }, [value]);
+  }, [city]);
+
+  const updatedAt = useMemo(() => {
+    if (!city) return "";
+    return new Date(city?.updatedAt).toLocaleTimeString();
+  }, [city]);
 
   return (
-    <Card className="weather-card">
+    <WeatherCardStyle className="weather-card">
       <CardHeader>
         <Text align="center" dBlock>
-          Urubici, BR
+          {city?.city}, {city?.country}
         </Text>
       </CardHeader>
-      <CardContent>
-        <Text color={color} align="center" dBlock fontSize="6em">
-          {value}º
-        </Text>
+      <CardContent className="weather-card-content">
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <div className="text-center">
+            <Text dBlock align="center" color="red">
+              Something went wrong
+            </Text>
+            <div className="mt-2">
+              <Button onClick={refresh}>Try Again</Button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div>
+              <Text color={color} align="center" dBlock fontSize="6em">
+                {city?.temperature}º
+              </Text>
+            </div>
+          </>
+        )}
       </CardContent>
-      <CardFooter>
-        {!details ? (
-          <DetailsRow>
-            <div className="detail">
-              <Text dBlock fontSize="0.9em" color="grey">
-                HUMIDITY
-              </Text>
-              <div>
-                <Text>75</Text>
-                <Text fontSize="0.7em">%</Text>
+      {!loading && !error && (
+        <CardFooter>
+          {props.showDetails ? (
+            <DetailsRow>
+              <div className="detail">
+                <Text dBlock fontSize="0.8em" color="grey">
+                  HUMIDITY
+                </Text>
+                <div>
+                  <Text>{city?.humidity}</Text>
+                  <Text fontSize="0.7em">%</Text>
+                </div>
               </div>
-            </div>
-            <div className="detail">
-              <Text dBlock fontSize="0.9em" color="grey">
-                PRESSURE
-              </Text>
-              <div>
-                <Text>892</Text>
-                <Text fontSize="0.7em">hPa</Text>
+              <div className="detail">
+                <Text dBlock fontSize="0.8em" color="grey">
+                  PRESSURE
+                </Text>
+                <div>
+                  <Text>{city?.pressure}</Text>
+                  <Text fontSize="0.7em">hPa</Text>
+                </div>
               </div>
-            </div>
-          </DetailsRow>
-        ) : null}
-        <Text dBlock align="center" color="grey" fontSize="0.7em">
-          Updated at 02:48:32 PM
-        </Text>
-      </CardFooter>
-    </Card>
+            </DetailsRow>
+          ) : null}
+          <Text dBlock align="center" color="grey" fontSize="0.7em">
+            Updated at {updatedAt}
+          </Text>
+        </CardFooter>
+      )}
+    </WeatherCardStyle>
   );
 }
+
+const WeatherCardStyle = styled(Card)`
+  .weather-card-content {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
 
 const DetailsRow = styled.div`
   display: flex;

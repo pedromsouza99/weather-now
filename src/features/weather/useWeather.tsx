@@ -31,7 +31,7 @@ export const weatherResponseExample = {
   name: "London",
   cod: 200,
 };
-export type ResponseType = typeof weatherResponseExample;
+export type CityWeatherResponse = typeof weatherResponseExample;
 
 export type CityWeather = {
   city: string;
@@ -79,7 +79,7 @@ export function useWeather(cityCode: string) {
   );
 
   const formatCityData = useCallback(
-    (data: ResponseType) => {
+    (data: CityWeatherResponse) => {
       const cityData: CityWeather = {
         cityCode: cityCode,
         city: data.name,
@@ -96,10 +96,10 @@ export function useWeather(cityCode: string) {
 
   const getCityWeather = useCallback(async () => {
     try {
-      const { data } = await axios.get<ResponseType>(
+      const data = await axios.get<CityWeatherResponse>(
         `https://${baseUrl}weather?q=${cityCode}&APPID=${weatherApiKey}`
       );
-      let cityData = formatCityData(data);
+      let cityData = formatCityData(data.data);
       cacheCityData(cityData);
       setCity(cityData);
       setLoading(false);

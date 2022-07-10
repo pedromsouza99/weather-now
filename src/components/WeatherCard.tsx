@@ -21,8 +21,9 @@ export function WeatherCard(props: WeatherCardProps) {
   const intervalRef = useRef<NodeJS.Timer>();
 
   useEffect(() => {
-    intervalRef.current = setInterval(getCityWeather, 10000);
     getCityWeather();
+    const minute = 60 * 1000;
+    intervalRef.current = setInterval(getCityWeather, minute * 10);
     return () => {
       clearInterval(intervalRef.current);
     };

@@ -34,11 +34,12 @@ const example = {
 export type ResponseType = typeof example;
 
 export type CityWeather = {
-  temperature: number;
   city: string;
+  cityCode: string;
   country: string;
-  pressure: number;
   humidity: number;
+  pressure: number;
+  temperature: number;
   updatedAt: Date;
 };
 
@@ -46,9 +47,36 @@ const weatherApiKey = "d04fb74ea277d323d70fa9f198572aae";
 const baseUrl = "api.openweathermap.org/data/2.5/";
 
 export function useWeather(cityCode: string) {
-  const [city, setCity] = useState<CityWeather>();
+  const [city, setCity] = useState<CityWeather>(() => {
+    // retrieve cached city data
+    const city = localStorage.getItem(cityCode);
+    if (city) {
+      let cityData: CityWeather = JSON.parse(city);
+      const cacheTimer = 1000 * 60 * 10; // 10 minutes
+      const now = new Date().valueOf();
+      const cachedAt = new Date(cityData.updatedAt).valueOf();
+      // if data was cached more than 10 minutes ago, discard it
+      if (now - cachedAt > cacheTimer) {
+        localStorage.removeItem(cityCode);
+      } else {
+        return JSON.parse(city);
+      }
+    }
+    return undefined;
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const cacheCityData = useCallback(
+    (data: CityWeather) => {
+      try {
+        localStorage.setItem(cityCode, JSON.stringify(data));
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [cityCode]
+  );
 
   const getCityWeather = useCallback(async () => {
     try {
@@ -57,6 +85,7 @@ export function useWeather(cityCode: string) {
       );
       const cityData = data.data;
       const _city: CityWeather = {
+        cityCode: cityCode,
         city: cityData.name,
         country: cityData.sys.country,
         temperature: Math.floor(cityData.main.temp - 273.15), // convert from kelvin to celsius
@@ -67,13 +96,13 @@ export function useWeather(cityCode: string) {
       setCity(_city);
       setLoading(false);
       setError(false);
-      console.log(data);
+      cacheCityData(_city);
     } catch (error) {
       console.error(error);
       setLoading(false);
       setError(true);
     }
-  }, [cityCode]);
+  }, [cacheCityData, cityCode]);
 
   return {
     city,

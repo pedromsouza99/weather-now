@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
 
-const example = {
+export const weatherResponseExample = {
   coord: { lon: -0.1257, lat: 51.5085 },
   weather: [
     { id: 801, main: "Clouds", description: "few clouds", icon: "02n" },
@@ -31,7 +31,7 @@ const example = {
   name: "London",
   cod: 200,
 };
-export type ResponseType = typeof example;
+export type ResponseType = typeof weatherResponseExample;
 
 export type CityWeather = {
   city: string;
@@ -78,31 +78,38 @@ export function useWeather(cityCode: string) {
     [cityCode]
   );
 
-  const getCityWeather = useCallback(async () => {
-    try {
-      const data = await axios.get<ResponseType>(
-        `https://${baseUrl}weather?q=${cityCode}&APPID=${weatherApiKey}`
-      );
-      const cityData = data.data;
-      const _city: CityWeather = {
+  const formatCityData = useCallback(
+    (data: ResponseType) => {
+      const cityData: CityWeather = {
         cityCode: cityCode,
-        city: cityData.name,
-        country: cityData.sys.country,
-        temperature: Math.floor(cityData.main.temp - 273.15), // convert from kelvin to celsius
-        pressure: cityData.main.pressure,
-        humidity: cityData.main.humidity,
+        city: data.name,
+        country: data.sys.country,
+        temperature: Math.floor(data.main.temp - 273.15), // convert from kelvin to celsius
+        pressure: data.main.pressure,
+        humidity: data.main.humidity,
         updatedAt: new Date(),
       };
-      setCity(_city);
+      return cityData;
+    },
+    [cityCode]
+  );
+
+  const getCityWeather = useCallback(async () => {
+    try {
+      const { data } = await axios.get<ResponseType>(
+        `https://${baseUrl}weather?q=${cityCode}&APPID=${weatherApiKey}`
+      );
+      let cityData = formatCityData(data);
+      cacheCityData(cityData);
+      setCity(cityData);
       setLoading(false);
       setError(false);
-      cacheCityData(_city);
     } catch (error) {
       console.error(error);
       setLoading(false);
       setError(true);
     }
-  }, [cacheCityData, cityCode]);
+  }, [cityCode, cacheCityData, formatCityData]);
 
   return {
     city,

@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
-import { useWeather } from "pages/Weather/useWeather";
-import { Button } from "components/layout/Button";
-import { Card } from "components/layout/Card";
-import { CardContent } from "components/layout/CardContent";
-import { CardFooter } from "components/layout/CardFooter";
-import { CardHeader } from "components/layout/CardHeader";
-import { Loader } from "components/layout/Loader";
-import { Text } from "components/layout/Text";
+import { useWeather } from "features/weather/useWeather";
+import { Button } from "components/Button";
+import { Card } from "components/Card";
+import { CardContent } from "components/CardContent";
+import { CardFooter } from "components/CardFooter";
+import { CardHeader } from "components/CardHeader";
+import { Loader } from "components/Loader";
+import { Text } from "components/Text";
 
 export interface WeatherCardProps {
   cityCode: string;
@@ -48,17 +48,17 @@ export function WeatherCard(props: WeatherCardProps) {
   }, [city]);
 
   return (
-    <WeatherCardStyle className="weather-card">
-      <CardHeader>
+    <WeatherCardStyle data-testid="weather-card" className="weather-card">
+      <CardHeader data-testid="card-header">
         <Text align="center" dBlock>
           {city ? `${city.city}, ${city.country}` : " "}
         </Text>
       </CardHeader>
       <CardContent className="weather-card-content">
         {loading ? (
-          <Loader />
+          <Loader data-testid="loader" />
         ) : error ? (
-          <div className="text-center">
+          <div className="text-center" data-testid="error-message">
             <Text dBlock align="center" color="red">
               Something went wrong
             </Text>
@@ -67,19 +67,23 @@ export function WeatherCard(props: WeatherCardProps) {
             </div>
           </div>
         ) : (
-          <>
-            <div>
-              <Text color={color} align="center" dBlock fontSize="4.5em">
-                {city?.temperature}º
-              </Text>
-            </div>
-          </>
+          <div>
+            <Text
+              data-testid="card-temperature"
+              color={color}
+              align="center"
+              dBlock
+              fontSize="4.5em"
+            >
+              {city?.temperature}º
+            </Text>
+          </div>
         )}
       </CardContent>
       {!loading && !error && (
-        <CardFooter>
+        <CardFooter data-testid="card-footer">
           {props.showDetails ? (
-            <DetailsRow>
+            <DetailsRow data-testid="details-row">
               <div className="detail">
                 <Text dBlock fontSize="0.8em" color="grey">
                   HUMIDITY

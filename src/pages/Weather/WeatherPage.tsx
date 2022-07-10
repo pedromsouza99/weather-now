@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Container } from "components/layout/Container";
-import { WeatherCard } from "components/WeatherCard/WeatherCard";
+import { Container } from "components/Container";
+import { WeatherCard } from "features/weather/WeatherCard/WeatherCard";
 
 export function WeatherPage() {
   return (

@@ -50,7 +50,7 @@ export function WeatherCard(props: WeatherCardProps) {
     <WeatherCardStyle className="weather-card">
       <CardHeader>
         <Text align="center" dBlock>
-          {city?.city}, {city?.country}
+          {city ? `${city.city}, ${city.country}` : " "}
         </Text>
       </CardHeader>
       <CardContent className="weather-card-content">
@@ -68,7 +68,7 @@ export function WeatherCard(props: WeatherCardProps) {
         ) : (
           <>
             <div>
-              <Text color={color} align="center" dBlock fontSize="6em">
+              <Text color={color} align="center" dBlock fontSize="4.5em">
                 {city?.temperature}º
               </Text>
             </div>
@@ -110,7 +110,7 @@ export function WeatherCard(props: WeatherCardProps) {
 
 const WeatherCardStyle = styled(Card)`
   .weather-card-content {
-    min-height: 150px;
+    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;

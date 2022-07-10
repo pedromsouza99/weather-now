@@ -5,7 +5,7 @@ interface TextProps {
   dBlock?: boolean;
   align?: "left" | "center" | "right";
   color?: string;
-  fontSize?: "0.7em" | "0.8em" | "0.9em" | "1em" | "1.2em" | "6em";
+  fontSize?: "0.7em" | "0.8em" | "0.9em" | "1em" | "1.2em" | "4.5em";
   fontWeight?: 300 | 600 | 800 | "bold" | "bolder";
   className?: string;
 }
